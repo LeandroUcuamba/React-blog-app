@@ -10,7 +10,7 @@ export function Router() {
       <Route path="/" element={<Feed />}/>
       <Route path="/createPost" element={<CreatePost />}/>
       <Route path="/updatePost/:id" element={<UpdatePost />}/>
-      <Route path="/post/1" element={<OnePost />}/>
+      <Route path="/post/:id" element={<OnePost />}/>
     </Routes>
   );
 }
