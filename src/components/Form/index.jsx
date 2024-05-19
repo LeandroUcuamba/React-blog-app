@@ -1,9 +1,11 @@
 import "./styles.css";
 
-export function Form() {
+export function Form({ title, textButton }) {
+
+
   return (
     <form>
-      <h2>Título</h2>
+      <h2>{ title }</h2>
       <div className="field">
         <input placeholder="Título" />
       </div>
@@ -16,7 +18,7 @@ export function Form() {
         <textarea placeholder="Descrição" />
       </div>
 
-      <button>Botão</button>
+      <button>{ textButton }</button>
     </form>
   );
 }
