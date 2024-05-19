@@ -1,7 +1,11 @@
 import "./styles.css";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 export function Card({ post }) {
+
+  const navigate = useNavigate();
+
   return (
     <article className="cardContainer">
       <header>
@@ -14,7 +18,7 @@ export function Card({ post }) {
 
       <div className="buttonsContainer">
         <button>Ver publicação</button>
-        <button>Atualizar</button>
+        <button onClick={() => navigate(`/updatePost/${post.id}`)}>Atualizar</button>
       </div>
     </article>
   );

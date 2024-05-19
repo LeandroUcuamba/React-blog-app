@@ -6,8 +6,8 @@ import "./styles.css"
 function App() {
   return (
     <>
-      <Header />
       <BrowserRouter>
+       <Header />
         <div className="app">
           <Router/>
         </div>

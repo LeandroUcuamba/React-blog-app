@@ -1,9 +1,10 @@
-import { api } from '../../lib/axios'
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import "./styles.css";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { api } from '../../lib/axios';
+import { useParams } from "react-router-dom";
 
 const postSchema = yup.object({
   title: yup.string().required("* informe o titulo"),
@@ -11,22 +12,25 @@ const postSchema = yup.object({
   content: yup.string().required("* o campo conteúdo não pode ser vazio")
 })
 
-export function Form({ title, textButton }) {
+export function Form({ title, textButton, onActionRequest }) {
 
-  const navigate = useNavigate();
+  const { id } = useParams(); 
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(postSchema)
   });
 
-  function handleCreatePost(data){
-     api.post('/posts', data);
-     reset();
-     navigate('/');
+  async function getDataUpdate(){
+    const response = await api.get(`/posts/${id}`);
+    reset(response.data);
   }
 
+  useEffect(() => {
+    getDataUpdate()
+  }, [])
+
   return (
-    <form onSubmit={handleSubmit(handleCreatePost)}>
+    <form onSubmit={handleSubmit(onActionRequest)}>
       <h2>{ title }</h2>
       <div className="field">
         <input placeholder="Título" {...register("title")}/>
