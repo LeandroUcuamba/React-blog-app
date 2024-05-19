@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Card } from '../../components/Card'
 import './styles.css'
 import { api } from '../../lib/axios'
+import { useParams } from "react-router-dom";
 
 export function Feed() {
   
@@ -17,10 +18,15 @@ export function Feed() {
     })
   }, [])
 
+  function handleDeletePost(id){
+     setPosts(posts.filter(post => post.id !== id));
+     api.delete(`/posts/${id}`);
+  }
+
   return (
     <div className="feedContainer">
       {posts.map((post) => (
-        <Card key={post.id} post={post}/>
+        <Card key={post.id} post={post} onDeletePost={handleDeletePost}/>
       ))}
     </div>
   );

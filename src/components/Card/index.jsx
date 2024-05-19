@@ -2,7 +2,7 @@ import "./styles.css";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 
-export function Card({ post }) {
+export function Card({ post, onDeletePost }) {
 
   const navigate = useNavigate();
 
@@ -10,7 +10,7 @@ export function Card({ post }) {
     <article className="cardContainer">
       <header>
         <h2>{post.title}</h2>
-        <MdDelete size={28} color="#ed4337" />
+        <MdDelete size={28} color="#ed4337" onClick={() => onDeletePost(post.id)}/>
       </header>
       <p>
         {post.description}

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Form } from "../../components/Form";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
@@ -13,11 +12,6 @@ export function UpdatePost() {
     api.put(`/posts/${id}`, data);
     navigate('/');
   }
-
-/*  useEffect(() => {
-    api.get(`/posts/${id}`)
-    .then(response => console.log(response.data))
-  }, []) */
 
   return (
     <div>
