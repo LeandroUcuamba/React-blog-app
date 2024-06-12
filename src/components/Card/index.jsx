@@ -6,6 +6,8 @@ export function Card({ post, onDeletePost }) {
 
   const navigate = useNavigate();
 
+  const trueLanguages = Object.entries(post.languages || {}).filter(([key, value]) => value === true).map(([key, value]) => key);
+
   return (
     <article className="cardContainer">
       <header>
@@ -15,6 +17,15 @@ export function Card({ post, onDeletePost }) {
       <p>
         {post.description}
       </p>
+
+      <div className="detailsContainer">
+        <div className="languages">
+          <strong>Linguagem:</strong> {trueLanguages.length > 0 ? trueLanguages.join(', ') : 'Nenhuma linguagem selecionada'}
+        </div>
+        <div className="country">
+          <strong>País:</strong> {post.country || 'Nenhum país selecionado'}
+        </div>
+      </div>
 
       <div className="buttonsContainer">
         <button onClick={() => navigate(`/post/${post.id}`)}>Ver publicação</button>
